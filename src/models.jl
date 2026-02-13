@@ -12,7 +12,7 @@ Construit un modèle JuMP pour la relaxation linéaire du UFLP.
 function build_PLSR(C::Matrix, f::Vector)
     n = length(f)
     
-    model = Model(Gurobi.optimizer)
+    model = Model(Gurobi.Optimizer)
 
 
     @variable(model, 0 <= y[1:n] <= 1) 
