@@ -1,9 +1,10 @@
 using JuMP, Gurobi, Plots, DelimitedFiles
 
 # --- Paramètres de recherche ---
-n_clients = 40
-p_sites = 12
-seed_depart = 100
+n_clients = 200
+p_sites = 30
+i = 11  
+seed_depart = i*500
 max_essais = 500
 found = false
 current_seed = seed_depart
@@ -47,9 +48,9 @@ end
 if found
     # --- 1. Enregistrement des données ---
     # Sauvegarde de C et f en fichiers texte pour réutilisation future
-    writedlm("C_instance_gap2.txt", C_final)
-    writedlm("f_instance_gap2.txt", f_final)
-    println("\n💾 Données sauvegardées dans 'C_instance_gap.txt' et 'f_instance_gap.txt'")
+    writedlm("Instances_with_gap/C_instance_gap$i.txt", C_final)
+    writedlm("Instances_with_gap/f_instance_gap$i.txt", f_final)
+    println("\n💾 Données sauvegardées dans 'C_instance_gap$i.txt' et 'f_instance_gap$i.txt'")
 
     # --- 2. Plot et Sauvegarde de l'image ---
     # On relance proprement pour avoir les objets de modèles à passer au plot
@@ -64,8 +65,8 @@ if found
     final_plot = plot(p1, p2, layout=(1, 2), size=(1200, 500))
     
     # Sauvegarde du graphique en PNG
-    savefig(final_plot, "comparaison_gap.png")
-    println("🖼️ Graphique sauvegardé sous 'comparaison_gap.png'")
+    savefig(final_plot, "Instances_with_gap/comparaison_gap$i.png")
+    println("🖼️ Graphique sauvegardé sous 'Instances_with_gap/comparaison_gap$i.png'")
     
     # Affichage
     display(final_plot)
